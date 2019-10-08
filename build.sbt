@@ -1,13 +1,8 @@
-//import com.typesafe.sbt.SbtMultiJvm.multiJvmSettings
-//import com.typesafe.sbt.SbtMultiJvm.MultiJvmKeys.MultiJvm
-
 val akkaVersion = "2.5.25"
 
 lazy val root = (project in file("."))
   .enablePlugins(MultiJvmPlugin)
   .configs(MultiJvm)
-//  .settings(multiJvmSettings: _*)
-//  .configs(MultiJvm)
   .settings(
     scalaVersion := "2.12.8",
     libraryDependencies ++= Seq(
