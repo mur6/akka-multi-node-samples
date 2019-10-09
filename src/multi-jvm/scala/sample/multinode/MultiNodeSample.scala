@@ -3,7 +3,6 @@ package sample.multinode
 import akka.actor.{Actor, Props}
 import akka.remote.testkit.{MultiNodeConfig, MultiNodeSpec}
 import akka.testkit.ImplicitSender
-// import akka.cluster.sharding.Sharding.
 
 object MultiNodeSampleConfig extends MultiNodeConfig {
   val node1 = role("node1")
@@ -14,16 +13,16 @@ object MultiNodeSampleConfig extends MultiNodeConfig {
 class MultiNodeSampleSpecMultiJvmNode1 extends MultiNodeSample
 class MultiNodeSampleSpecMultiJvmNode2 extends MultiNodeSample
 
+
 object MultiNodeSample {
   class Ponger extends Actor {
-    def receive = {
+    def receive: Receive = {
       case "ping" => sender() ! "pong"
     }
   }
 }
 
-class MultiNodeSample extends MultiNodeSpec(MultiNodeSampleConfig)
-  with STMultiNodeSpec with ImplicitSender {
+class MultiNodeSample extends MultiNodeSpec(MultiNodeSampleConfig) with STMultiNodeSpec with ImplicitSender {
 
   import MultiNodeSample._
   import MultiNodeSampleConfig._
