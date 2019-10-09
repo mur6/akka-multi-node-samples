@@ -1,20 +1,15 @@
-//#package
 package sample.multinode
-//#package
 
-//#config
-import akka.remote.testkit.MultiNodeConfig
+import akka.actor.{Actor, Props}
+import akka.remote.testkit.{MultiNodeConfig, MultiNodeSpec}
+import akka.testkit.ImplicitSender
+// import akka.cluster.sharding.Sharding.
 
 object MultiNodeSampleConfig extends MultiNodeConfig {
   val node1 = role("node1")
   val node2 = role("node2")
 }
-//#config
 
-//#spec
-import akka.remote.testkit.MultiNodeSpec
-import akka.testkit.ImplicitSender
-import akka.actor.{ Props, Actor }
 
 class MultiNodeSampleSpecMultiJvmNode1 extends MultiNodeSample
 class MultiNodeSampleSpecMultiJvmNode2 extends MultiNodeSample
@@ -30,8 +25,8 @@ object MultiNodeSample {
 class MultiNodeSample extends MultiNodeSpec(MultiNodeSampleConfig)
   with STMultiNodeSpec with ImplicitSender {
 
-  import MultiNodeSampleConfig._
   import MultiNodeSample._
+  import MultiNodeSampleConfig._
 
   def initialParticipants = roles.size
 
@@ -59,4 +54,3 @@ class MultiNodeSample extends MultiNodeSpec(MultiNodeSampleConfig)
     }
   }
 }
-//#spec
