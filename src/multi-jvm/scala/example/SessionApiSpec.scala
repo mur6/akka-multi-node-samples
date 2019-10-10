@@ -19,10 +19,12 @@ object MultiNodeSampleConfig extends MultiNodeConfig {
 
 // # don't use sigar for tests, native lib not in path
 // akka.cluster.metrics.collector-class = akka.cluster.JmxMetricsCollector
+
+
+
 class WordsClusterSpec extends MultiNodeSpec(MultiNodeSampleConfig)
   with STMultiNodeSpec with ImplicitSender {
 
-  import WordsClusterSpecConfig._
 
   def initialParticipants = roles.size
 
