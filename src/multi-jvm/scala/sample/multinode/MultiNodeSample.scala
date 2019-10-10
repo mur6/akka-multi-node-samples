@@ -4,6 +4,7 @@ import akka.actor.Props
 import akka.remote.testkit.{MultiNodeConfig, MultiNodeSpec}
 import akka.testkit.ImplicitSender
 import scala.concurrent.duration._
+import example.TestActor
 
 
 object MultiNodeSampleConfig extends MultiNodeConfig {
@@ -26,13 +27,13 @@ class MultiNodeSample extends MultiNodeSpec(MultiNodeSampleConfig) with STMultiN
         enterBarrier("deployed")
         val path = node(node2)
         println(path)
-        val pActor = system.actorSelection(path / "user" / "pong1")
-        pActor ! "ping"
-        expectMsg(10.seconds, "pong")
+        val pActor = system.actorSelection(path / "user" / "test-actor-1")
+        pActor ! TestActor.Command(20)
+        expectMsg(10.seconds, TestActor.Response(21))
       }
 
       runOn(node2) {
-        system.actorOf(Props[Pong], "pong1")
+        system.actorOf(Props[TestActor], "test-actor-1")
         enterBarrier("deployed")
       }
 
