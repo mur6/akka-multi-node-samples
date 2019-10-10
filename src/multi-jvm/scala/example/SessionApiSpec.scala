@@ -2,7 +2,7 @@ package example
 
 import org.scalatest.WordSpec
 import org.scalatest.MustMatchers
-import akka.remote.testkit.{MultiNodeConfig, STMultiNodeSpec}
+import akka.remote.testkit.{MultiNodeConfig, MultiNodeSpec, STMultiNodeSpec}
 import com.typesafe.config.ConfigFactory
 
 object MultiNodeSampleConfig extends MultiNodeConfig {
@@ -23,17 +23,18 @@ object MultiNodeSampleConfig extends MultiNodeConfig {
 
 
 class WordsClusterSpec extends MultiNodeSpec(MultiNodeSampleConfig)
-  with STMultiNodeSpec with ImplicitSender {
+  with STMultiNodeSpec with ImplicitSender
+]{
 
 
-  def initialParticipants = roles.size
-
-  val seedAddress = node(seed).address
-  val masterAddress = node(master).address
-  val worker1Address = node(worker1).address
-  val worker2Address = node(worker2).address
-
-  muteDeadLetters(classOf[Any])(system)
+//  def initialParticipants = roles.size
+//
+//  val seedAddress = node(seed).address
+//  val masterAddress = node(master).address
+//  val worker1Address = node(worker1).address
+//  val worker2Address = node(worker2).address
+//
+//  muteDeadLetters(classOf[Any])(system)
 }
 
 class SpecMultiJvmNode1 extends WordSpec with MustMatchers {
